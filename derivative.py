@@ -18,4 +18,4 @@ def derivative(eq):
 
 
 if __name__ == '__main__':
-    print(derivative('d((sqrt(x)) * lambda)/dx'))
+    print(derivative('d(2*x * lambda)/dlambda'))
