@@ -133,5 +133,6 @@ def Unary_quadratic(L):
             Lats_List.append(eq_DC["1st"]["var"]+" = "+str(result[0])+" or "+str(result[1]))
     print(eq_DC)
     print(Lats_List)
+    return Lats_List
 
 Unary_quadratic("(-1)*x**2-5")
