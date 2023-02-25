@@ -67,6 +67,13 @@ def parsing(la):
     while times_index != -1:
         la = la[:times_index] + '*' + la[times_index+6:]
         times_index = la.find('\\times')
+    sin_index = la.find('[')
+    while sin_index != -1:
+        la = la[:sin_index] + '(' + la[sin_index+1:]
+    sin_index = la.find(']')
+    while sin_index != -1:
+        la = la[:sin_index] + ')' + la[sin_index + 1:]
+
     return la
 
 
