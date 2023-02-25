@@ -8,7 +8,7 @@ def Unary_quadratic(L):
     eq_DC = {} #List of each part in the equation 
     eq_Part_Dc = {} #Temp Dictioninary for each part
     for i in range(len(eq_String)):
-        if i == 1 and eq_String[0]=="(":
+        if i >= 1 and eq_String[i] == '-' and eq_String[i-1]=="(":
             Part+=eq_String[i]
         elif (eq_String[i] == '+' or eq_String[i] == '-') and i!=0 :
             index = 0
@@ -133,3 +133,5 @@ def Unary_quadratic(L):
             Lats_List.append(eq_DC["1st"]["var"]+" = "+str(result[0])+" or "+str(result[1]))
     print(eq_DC)
     print(Lats_List)
+
+Unary_quadratic("(-1)*x**2-5")
