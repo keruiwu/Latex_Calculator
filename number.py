@@ -8,9 +8,6 @@ def decimal_convertB(I):
     Lat_List["Title"] = []
     Lat_List["Subtitle"] = []
     while(Num!= 1):
-        if Num == I:
-            Lat_List["Title"].append("Step to convert decimal to Binary String")
-            Lat_List["Subtitle"].append("We can do it by divide decimal by 2 until the divisor is 1")
         div  = Num//2
         remainder = Num%2
         Lat_List["Title"].append("{} / 2 = {}".format(Num,div))
@@ -21,21 +18,22 @@ def decimal_convertB(I):
     Lat_List["Subtitle"].append("Write 1 to the front of the bianry string and then reverse it")
     Binary.append(1)
     Binary.reverse()
-    Lat_List["Title"].append("The binary string will be ")
-    Lat_List["Subtitle"].append("".join(str(item) for item in Binary))
+    Lat_List["Title"].append("".join(str(item) for item in Binary))
+    Lat_List["Subtitle"].append("Final result is this!")
     return Lat_List
 
 def Binary_convertD(S):
     S=S[::-1]
     Latx = ""
     for i in range(len(S)):
-        if S[i] == 1:
-            Latx+="2^{}".format(i)+" + "
         if i == len(S)-1:
-             Latx+="2^{}".format(i)
-    Latx_List = []
-    Latx_List.append(Latx)
-    Latx_List.append(str(int(S[::-1],2)))
-    return Latx_List
-print(decimal_convertB(99))  
-print(Binary_convertD("1000"))
+             Latx += "2^{" + str(i) + "}"
+        elif S[i] == '1':
+            Latx += "2^{" + str(i) + "}" + " + "
+    Latx += ' = ' + str(int(S[::-1],2))
+    return Latx
+
+
+if __name__ == '__main__':
+    print(decimal_convertB(99))
+    print(Binary_convertD("1000110101010"))
