@@ -1,5 +1,5 @@
 from sympy import *
-
+import parsing as p
 def ToClose(temp):
     """
 
@@ -47,8 +47,5 @@ def integral(eq):
 
 
 if __name__ == '__main__':
-    eqs = ['\int (x ** 2 + (1/x))dx', '\int_{b}^{a} (x ** 2 + (1/x))dx', "\int (1/(2*y + cos(y)))dy", "\int (1/(6*x**2))dx", "\int (3*x**2+4*x-5)dx", 
-           "\int ((x+1)*e**(2*x))dx"]
-    for e in eqs:
-        print(integral(e))
-        print()
+    print(p.parsing("\int \\frac{1}{x^2}dx"))
+    print(integral(p.parsing("\int \\frac{1}{x^2}dx")))
