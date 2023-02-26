@@ -1,6 +1,3 @@
-from differential_equation import seperable_variable as s
-
-
 def ToClose(temp):
     """
 
