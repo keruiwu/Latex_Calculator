@@ -1,5 +1,5 @@
 import sympy
-import parsing as p
+
 def Unary_quadratic(L):
     eq_String = L.replace(" ", "")
     Lats_List = []
@@ -72,11 +72,9 @@ def Unary_quadratic(L):
 
         else:
             Part+=eq_String[i]
-    print(eq_DC)
     if len(eq_DC)==1:
         Lats_List.append(sympy.latex(sympy.parse_expr(eq_DC["1st"]["var"]+ "**2")) + "= 0")
         Lats_List.append(eq_DC["1st"]["var"]+ " = 0")
-
     elif len(eq_DC)==2:
         if "C" in eq_DC:
             if eq_DC["C"]["syb"]=="-":
@@ -133,6 +131,5 @@ def Unary_quadratic(L):
 
 
 if __name__ == '__main__':
-    print(p.parsing("-\\frac{5}{4}x^2-\\frac{5}{4}x"))
-    print(Unary_quadratic(p.parsing("-\\frac{5}{4}x^2-\\frac{5}{4}x")))
+    print('hello world')
 

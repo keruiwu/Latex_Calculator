@@ -5,15 +5,14 @@ def gradiant(Line):
     for i in Line:
         if i.isalpha():
             Var.add(i)
-    print(Var)
     if len(Var)==2:
-        dx = d.derivative('d('+ Line +')/dx')
-        dy = d.derivative('d('+ Line +')/dy')
-        return "<"+dx+">, <"+dy+">"
+        dx = d.derivative('((d('+ Line +'))/(dx))')
+        dy = d.derivative('((d('+ Line +'))/(dy))')
+        return "<"+dx+", "+dy+">"
     elif len(Var)==3:
-        dx = d.derivative('d('+ Line +')/dx')
-        dy = d.derivative('d('+ Line +')/dy')
-        dz = d.derivative('d('+ Line +')/dz')
-        return "<"+dx+">, <"+dy+">, <"+dz+">"
+        dx = d.derivative('((d('+ Line +'))/(dx))')
+        dy = d.derivative('((d('+ Line +'))/(dy))')
+        dz = d.derivative('((d('+ Line +'))/(dz))')
+        return "<"+dx+", "+dy+", "+dz+">"
 if __name__ == '__main__':
-    print(gradiant("2*x**2+3*y**2+2*z**2"))
+    print(gradiant("x**2-x-6+y**(3)+z"))
