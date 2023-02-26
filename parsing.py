@@ -153,7 +153,7 @@ def parsing(la):
         i += 1
     for i in greek:
         la = la.replace(i, i[1:])
-    return la
+    return la.replace("\\left", "").replace("\\right", "")
 
 
 if __name__ == '__main__':

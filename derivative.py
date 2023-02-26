@@ -42,5 +42,6 @@ def derivative(eq):  # $$\frac{d\frac{1}{x}}{dx}$$
     return latex(diff(equation, var))
 
 
-if __name__ == '__main__':
-    print(derivative('((d(((1)/(x))))/(dx))'))
+if __name__ == '__main__':#$$\frac{d\frac{1}{x}}{dx}$$
+    test = "$$\\frac{d\\frac{1}{x}}{dx}$$"
+    print(derivative(parsing(test)))
