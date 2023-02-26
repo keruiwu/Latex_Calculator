@@ -1,5 +1,5 @@
 import sympy
-import parsing
+import parsing as p
 def Unary_quadratic(L):
     eq_String = L.replace(" ", "")
     Lats_List = []
@@ -8,9 +8,7 @@ def Unary_quadratic(L):
     eq_DC = {} #List of each part in the equation 
     eq_Part_Dc = {} #Temp Dictioninary for each part
     for i in range(len(eq_String)):
-        if i >= 1 and eq_String[i] == '-' and eq_String[i-1]=="(":
-            Part+=eq_String[i]
-        elif (eq_String[i] == '+' or eq_String[i] == '-') and i!=0 :
+        if (eq_String[i] == '+' or eq_String[i] == '-') and i!=0 :
             index = 0
             var = ''
             for j in range(len(Part)):
@@ -135,5 +133,6 @@ def Unary_quadratic(L):
 
 
 if __name__ == '__main__':
-    print(Unary_quadratic("(-5/4)*x**          2+2* x+ 1 "))
+    print(p.parsing("-\\frac{5}{4}x^2-\\frac{5}{4}x"))
+    print(Unary_quadratic(p.parsing("-\\frac{5}{4}x^2-\\frac{5}{4}x")))
 
