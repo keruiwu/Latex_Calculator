@@ -1,5 +1,6 @@
 from sympy import *
-import parsing as p
+from parsing import parsing
+
 def ToClose(temp):
     """
 
@@ -32,9 +33,9 @@ def integral(eq):
         var = 'lamda'
     var = symbols(var)
     if eq[4] != '_':  # 不定积分
-        equation = eq[6:eq_end]
+        equation = eq[5:eq_end+1]
         equation = simplify(equation.replace('lambda', 'lamda'))
-        return latex(integrate(equation, var)) + '+C'
+        return str(latex(integrate(equation, var)).replace("\\left", "").replace("\\right", "") + '+C')
     else:  # 定积分
         direct = ToClose(eq[6:])
         b = direct['result']  # 上限
@@ -43,9 +44,11 @@ def integral(eq):
         a = direct['result']  # 下限
         equation = eq[5 + b_end + 4 + direct['index'] + 3:eq_end]
         equation = simplify(equation.replace('lambda', 'lamda'))
-        return latex(integrate(equation, (var, a, b)))
+        return str(latex(integrate(equation, (var, a, b))).replace("\\left", "").replace("\\right", ""))
 
 
-if __name__ == '__main__':
-    print(p.parsing("\int \\frac{1}{x^2}dx"))
-    print(integral(p.parsing("\int \\frac{1}{x^2}dx")))
+if __name__ == '__main__': #'\int (x^2 + \frac{1}{x})dx'
+    eqs = "$$\\int (x^2 + \\frac{1}{x})dx$$"
+    print(integral(parsing(eqs)))
+    
+    #['\int(x**2+(1/x))dx', '\int_{b}^{a} (x ** 2 + (1/x))dx', "\int (1/(2*y + cos(y)))dy", "\int (1/(6*x**2))dx", "\int (3*x**2+4*x-5)dx", "\int ((x+1)*e**(2*x))dx"]
