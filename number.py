@@ -1,5 +1,5 @@
 import sympy
-def binary_convert(I):
+def decimal_convertB(I):
     Num = I
     remainder = 0
     div = 0
@@ -21,6 +21,7 @@ def binary_convert(I):
     Lat_List.append("".join(str(item) for item in Binary))
     return Lat_List
 
-
-print(binary_convert(99))  
-print(bin(8))
+def Binary_convertD(S):
+    return str(int(S,2))
+print(decimal_convertB(99))  
+print(Binary_convertD("1000"))
