@@ -52,6 +52,9 @@ def sqrt(la, sqrt_start):
     return sqrt_eq, la, sqrt_index_end
 
 def parsing(la):
+    greek = ["\\alpha", "\\beta", "\\gamma", "\\delta", "\\varepsilon", "\\eta", "\\theta", "\\iota", "\\kappa", "\\lambda",
+     "\\mu", "\\nu", "\\xi", "\\o", "\\pi", "\\rho", "\\sigma", "\\tau", "\\upsilon", "\\varphi", "\\chi", "\\psi",
+     "\\omega"]
     la = la.strip('$$')
     frac_index = la.find('\\frac')
     while frac_index != -1:
@@ -118,11 +121,25 @@ def parsing(la):
         sqrt_result, sqrt_half, end = sqrt(la[sqrt_index+1:], 5)
         la = la[0:sqrt_index] + la[sqrt_index+1:sqrt_index+5] + sqrt_result + sqrt_half[end+1:]
         sqrt_index = la.find('\\sqrt')
-
+    i = 0
+    while i < len(la):
+        if i == len(la) - 1:
+            break
+        if la[i].isdigit():
+            if la[i+1] == '\\' or la[i+1].isalpha() or la[i+1] == '(':  # 2x => 2 * x
+                la = la[:i+1] + '*' + la[i+1:]
+        elif la[i] == ')':  # (2+x)(3+y)
+            if la[i+1].isalnum() or la[i+1] == '(':
+                la = la[:i+1] + '*' + la[i+1:]
+        elif la[i] == '\\':
+            if la[i-1].isalpha():
+                la = la[:i] + '*' + la[i:]
+        i += 1
+    for i in greek:
+        la = la.replace(i, i[1:])
     return la
 
 
 if __name__ == '__main__':
-    test = ["$${ \\lim_{x \\to 0} \\frac{3*x^m*n +7*x^{3}}{x^{2} +5*x^{4}}}$$", "$${ \\lim_{x \\to 0} \\frac{3*x^m*n + \\sqrt{7*x}}{x^{2} +5*x^{4}}}$$"]
-    for t in test:
-        print(parsing(t))
+    test = "f(x,y)=2x^3y^4-(4x^5y^3-6x^2)(a\delta)2(x+3)"
+    print(parsing(test))

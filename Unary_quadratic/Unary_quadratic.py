@@ -124,9 +124,9 @@ def Unary_quadratic(L):
             Lats_List.append(eq_DC["1st"]["var"]+" = "+sympy.latex(result[0]))
         else:
             Lats_List.append(eq_DC["1st"]["var"]+" = "+sympy.latex(result[0])+" or "+sympy.latex(result[1]))
-    print(eq_DC)
-    print(Lats_List)
     return Lats_List
 
-Unary_quadratic("6*x**2+4*x+4")
+
+if __name__ == '__main__':
+    print(Unary_quadratic("6*x**2+4*x+4"))
 
