@@ -1,5 +1,5 @@
 import sympy
-def decimal_convertB(I):
+def Decimal_convertB(I):
     Num = I
     remainder = 0
     div = 0
