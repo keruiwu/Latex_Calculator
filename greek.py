@@ -8,8 +8,8 @@ f = open('data.json', 'w', encoding='utf-8')
 browser = webdriver.Chrome()
 action = ActionChains(browser)
 browser.get('https://www.xilazimu.net/m/articles/greek_letter_latex.html')
-result = {}
+result = {'result': []}
 ele = browser.find_elements(By.XPATH, '/html/body/div[2]/div/div/div/div/table[1]/tbody/tr/td[2]')
 for i in ele:
-    result[i.text].append(i.text[1:])
+    result['result'].append(i.text[1:])
 json.dump(result, f)
