@@ -79,38 +79,40 @@ def Unary_quadratic(L):
             print(Part)
         
     if len(eq_DC)==1:
-        Lats_List.append(eq_DC["1st"]["var"]+ "**2 = 0")
+        Lats_List.append(sympy.latex(sympy.parse_expr(eq_DC["1st"]["var"]+ "**2")) + "= 0")
         Lats_List.append(eq_DC["1st"]["var"]+ " = 0")
+
     elif len(eq_DC)==2:
         if "C" in eq_DC:
             if eq_DC["C"]["syb"]=="-":
                 if(eq_DC["1st"]["const"])=='1':
-                    Lats_List.append(eq_DC["1st"]["var"] + "**2 = " + eq_DC["C"]["const"])
+                    Lats_List.append(sympy.latex(sympy.parse_expr(eq_DC["1st"]["var"] + "**2"))+" = " + sympy.latex(sympy.parse_expr(eq_DC["C"]["const"])))
 
                 else:
-                    Lats_List.append(eq_DC["1st"]["const"] + eq_DC["1st"]["var"] + "**2 = " + eq_DC["C"]["const"])
+                    Lats_List.append(sympy.latex(sympy.parse_expr(eq_DC["1st"]["const"] +"*"+ eq_DC["1st"]["var"] + "**2"))+ " = " + sympy.latex(sympy.parse_expr(eq_DC["C"]["const"])))
                     tmp = eq_DC["C"]["const"]+"/"+ eq_DC["1st"]["const"]  
                     tmp = sympy.simplify(tmp)                       
-                    Lats_List.append(eq_DC["1st"]["var"] + "**2 = " + str(tmp))
+                    Lats_List.append(sympy.latex(sympy.parse_expr(eq_DC["1st"]["var"] + "**2"))+" = " + sympy.latex(tmp))
                 #Lats_List.append()
                 result = sympy.solve(eq_DC["1st"]["const"] + "*"+ eq_DC["1st"]["var"] + "**2 - " + eq_DC["C"]["const"],eq_DC["1st"]["var"])
-                Lats_List.append(eq_DC["1st"]["var"] + " = " + str(result[0])+" or "+str(result[1]))
+                Lats_List.append(eq_DC["1st"]["var"] + " = " + sympy.latex(result[0])+" or "+sympy.latex(result[1]))
 
             elif eq_DC["C"]["syb"]=="+":
                 if(eq_DC["1st"]["const"])=='1':
-                    Lats_List.append(eq_DC["1st"]["var"] + "**2 = " + '-' + eq_DC["C"]["const"])
+                    Lats_List.append(sympy.latex(sympy.parse_expr(eq_DC["1st"]["var"] + "**2"))+" = " + '-' + sympy.latex(sympy.parse_expr(eq_DC["C"]["const"])))
                 else:
-                    Lats_List.append(eq_DC["1st"]["const"] + eq_DC["1st"]["var"] + "**2 = " + '-' + eq_DC["C"]["const"])
+                    Lats_List.append(sympy.latex(sympy.parse_expr(eq_DC["1st"]["const"] +"*"+ eq_DC["1st"]["var"] + "**2")) + " = " + '-' + sympy.latex(sympy.parse_expr(eq_DC["C"]["const"])))
                     tmp = eq_DC["C"]["const"]+"/"+ eq_DC["1st"]["const"]  
                     tmp = sympy.simplify(tmp)                       
-                    Lats_List.append(eq_DC["1st"]["var"] + "**2 = " + "-" + str(tmp))
+                    Lats_List.append(sympy.latex(sympy.parse_expr(eq_DC["1st"]["var"] + "**2"))+" = " + "-" + sympy.latex(tmp))
 
                 result = sympy.solve(eq_DC["1st"]["const"] + "*"+ eq_DC["1st"]["var"] + "**2 + " + eq_DC["C"]["const"],eq_DC["1st"]["var"])
-                Lats_List.append(eq_DC["1st"]["var"] + " = " + str(result[0])+" or "+str(result[1]))
+                Lats_List.append(eq_DC["1st"]["var"] + " = " + sympy.latex(result[0])+" or "+sympy.latex(result[1]))
         elif "2st" in eq_DC:
-            Lats_List.append(sympy.factor(eq_DC["1st"]["const"] +"*" + eq_DC["1st"]["var"] + "**2" + eq_DC["2st"]["syb"]+eq_DC["2st"]["const"]+"*"+eq_DC["2st"]["var"]))
+            Lats_List.append(sympy.latex(sympy.factor(eq_DC["1st"]["const"] +"*" + eq_DC["1st"]["var"] + "**2" + eq_DC["2st"]["syb"]+eq_DC["2st"]["const"]+"*"+eq_DC["2st"]["var"])))
             result = sympy.solve(eq_DC["1st"]["const"] +"*" + eq_DC["1st"]["var"] + "**2" + eq_DC["2st"]["syb"]+eq_DC["2st"]["const"]+"*"+eq_DC["2st"]["var"], eq_DC["1st"]["var"])
-            Lats_List.append(eq_DC["1st"]["var"]+" = "+str(result[0])+" or "+str(result[1]))
+            Lats_List.append(eq_DC["1st"]["var"]+" = "+sympy.latex(result[0])+" or "+sympy.latex(result[1]))
+
     elif len(eq_DC)==3:
         a = eq_DC["1st"]["const"]
         if eq_DC["2st"]["syb"]=='+':
@@ -123,16 +125,16 @@ def Unary_quadratic(L):
         else:
             c = '-'+eq_DC["C"]["const"]
         
-        Lats_List.append("\\delta = b**2 - 4 * a * c")
-        Lats_List.append("x = (-b+-sqrt(b**2-4*a*c))/2a")
-        Lats_List.append("x = (-" + b + "+-sqrt("+b+"**2-4*"+a+"*"+c+"))/(2*" + a+")")
+        Lats_List.append("\\delta = "+sympy.latex(sympy.parse_expr("b**2 - 4 * a * c")))
+        Lats_List.append("x = \\frac{- b \\pm \\sqrt{- 4 a c + b^{2}}}{2 a}")
+        Lats_List.append("x = \\frac{- "+sympy.latex(sympy.parse_expr(b))+ "\\pm \\sqrt{- 4 "+"\\times"+sympy.latex(sympy.parse_expr(a))+" "+ "\\times"+ sympy.latex(sympy.parse_expr(c)) + " + " + sympy.latex(sympy.parse_expr(b)) + "^{2}}}{2 " + "\\times"+sympy.latex(sympy.parse_expr(a))+"}")
         result = sympy.solve(eq_DC["1st"]["const"]+"*"+eq_DC["1st"]["var"]+"**2"+eq_DC["2st"]["syb"]+eq_DC["2st"]["const"]+"*"+eq_DC["2st"]["var"]+eq_DC["C"]["syb"]+eq_DC["C"]["const"],eq_DC["1st"]["var"])
         if len(result)==1:
-            Lats_List.append(eq_DC["1st"]["var"]+" = "+str(result[0]))
+            Lats_List.append(eq_DC["1st"]["var"]+" = "+sympy.latex(result[0]))
         else:
-            Lats_List.append(eq_DC["1st"]["var"]+" = "+str(result[0])+" or "+str(result[1]))
+            Lats_List.append(eq_DC["1st"]["var"]+" = "+sympy.latex(result[0])+" or "+sympy.latex(result[1]))
     print(eq_DC)
     print(Lats_List)
     return Lats_List
 
-Unary_quadratic("(-1)*x**2-5")
+Unary_quadratic("6*x**2+4*x+4")
