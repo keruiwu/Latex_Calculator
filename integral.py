@@ -1,6 +1,28 @@
 from sympy import *
-from parsing import ToClose
 
+def ToClose(temp):
+    """
+
+    :param temp: sentence start with the character just after the beginning of {
+    :return: {index: index of close '}', result: content inside the curly }
+    """
+    wait_list = 1
+    result = ''
+    for i in range(len(temp)):
+        if temp[i] == '{':
+            wait_list += 1
+        elif temp[i] == '}':
+            wait_list -= 1
+        if wait_list == 0:
+            return {
+                'index': i,
+                'result': result
+            }
+        result += temp[i]
+    return {
+        'index': -1,
+        'result': 'invalid Latex'
+    }
 
 def integral(eq):
     # \int_{a}^{b} (x ** 2 + (1/x))
@@ -27,4 +49,8 @@ def integral(eq):
 if __name__ == '__main__':
     eq = '\int (x ** 2 + (1/x))dx'  # equation must be surrounded by parenthesis
     eq_2 = '\int_{b}^{a} (x ** 2 + (1/x))dx'
-    print(integral(eq))
+    eq_3 = "\int (1/(2*y + cos(y)))dy"
+    eq_4 = "\int (1/(6*x**2))dx"
+    print(integral(eq_3))
+    print()
+    print(integral(eq_4))
