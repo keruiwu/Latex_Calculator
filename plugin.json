@@ -1,0 +1,12 @@
+{
+    "ID":"4EBD020883285D698C44EC50939C0967",
+    "ActionKeyword":"brick",
+    "Name":"Latex_Calculator",
+    "Description":"calculator based on Latex syntax",
+    "Author":"Ray&Tim&Bijun",
+    "Version":"1.3.524",
+    "Language":"python",
+    "Website":"https://github.com/Yujjio/Wox_Plugin_Translator",
+    "IcoPath":"Images\\icon.ico",
+    "ExecuteFileName":"main.py"
+}

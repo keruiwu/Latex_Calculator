@@ -14,7 +14,7 @@ def cal_limit(or_eq):
     elif (or_eq[index_to + 4] == '-' and or_eq[index_to + 6].isalpha()):
         num_to = -oo
 
-    limit_str = or_eq[num_to_end+3:-1]
+    limit_str = or_eq[num_to_end+2:-1]
     limit_exp = simplify(limit_str)
     print(limit_exp, var_to, num_to)
     result = limit(limit_exp, var_to, num_to)
