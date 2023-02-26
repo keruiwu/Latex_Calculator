@@ -161,5 +161,5 @@ def parsing(la):
 if __name__ == '__main__':
     # test = "f(x,y)=2x^3y^4-(4x^5y^3-6x^2)(a\delta)2(x+3)"
     # print(parsing(test))
-    test = "$$\int_{5}^{0} (\\frac{1}{x})dx$$"
+    test = "$$\int_{0}^{1}(\sqrt{1+7x})dx$$"
     print(parsing(test))
