@@ -1,4 +1,6 @@
 from differential_equation import seperable_variable as s
+
+
 def ToClose(temp):
     """
 
@@ -44,7 +46,15 @@ def power_latex(la, power_index):
     direct = ToClose(la[power_index:])
     return {
         'index': power_index + direct['index'],
-        'result': la[power_index-3:power_index-2] + '**(' + str(direct['result']) + ')'
+        'result': la[power_index-3] + '**(' + str(direct['result']) + ')'
+    }
+
+
+def exp_latex(la, exp_index):  # x^2 + y^2}
+    direct = ToClose(la[exp_index:])
+    return {
+        'index': exp_index + direct['index'],
+        'result': 'exp(' + direct['result'] + ')'
     }
 
 def sqrt(la, sqrt_start):
@@ -63,7 +73,14 @@ def parsing(la):
         frac_result = frac(la, frac_index+6)  # 6 means "\\frac{"
         la = la[:frac_index] + frac_result['result'] + la[frac_result['index']-1:]
         frac_index = la.find('\\frac')
-
+    exp_index = la.find('e^')
+    while exp_index != -1:
+        if la[exp_index+2] == '{':
+            exp_result = exp_latex(la, exp_index+3)
+            la = la[:exp_index] + exp_result['result'] + la[exp_result['index']+1:]
+        else:  # e^x
+            la = la[:exp_index] + 'exp(' + la[exp_index+2] + ')' + la[exp_index+3:]
+        exp_index = la.find('e^')
     power_index = la.find('^')
     while power_index != -1:
         if la[power_index+1] == '{':
@@ -97,12 +114,12 @@ def parsing(la):
     while sin_index != -1:
         la = la[0:sin_index] + la[sin_index+2:]
         sin_index = la.find('\\sin')
-    
+
     tan_index = la.find('\\tan')
     while tan_index != -1:
         la = la[0:tan_index] + la[tan_index+2:]
         tan_index = la.find('\\tan')
-    
+
     cos_index = la.find('\\cos')
     while cos_index != -1:
         la = la[0:cos_index] + la[cos_index+2:]
@@ -112,12 +129,12 @@ def parsing(la):
     while ln_index != -1:
         la = la[0:ln_index] + la[ln_index+2:]
         ln_index = la.find('\\ln')
-    
+
     log_index = la.find('\\log')
     while log_index != -1:
         la = la[0:log_index] + la[log_index+2:]
         log_index = la.find('\\log')
-    
+
     sqrt_index = la.find('\\sqrt')
     while sqrt_index != -1:
         sqrt_result, sqrt_half, end = sqrt(la[sqrt_index+1:], 5)
@@ -145,6 +162,5 @@ def parsing(la):
 if __name__ == '__main__':
     # test = "f(x,y)=2x^3y^4-(4x^5y^3-6x^2)(a\delta)2(x+3)"
     # print(parsing(test))
-    test = "$$\\frac{dy}{dx}=\\frac{(2*y + cos(y))}{(6*x**2)}$$"
+    test = "$$\\frac{dy}{dx}=\\frac{(2*y + cos(y))}{e^x}$$"
     print(parsing(test))
-    print(s(parsing(test)))
