@@ -1,5 +1,5 @@
 import sympy
-def decimal_convertB(I):
+def Decimal_convertB(I):
     Num = I
     remainder = 0
     div = 0
@@ -35,5 +35,5 @@ def Binary_convertD(S):
 
 
 if __name__ == '__main__':
-    print(decimal_convertB(99))
+    print(Decimal_convertB(99))
     print(Binary_convertD("1000110101010"))
