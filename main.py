@@ -7,6 +7,7 @@ from number import Decimal_convertB
 from number import Binary_convertD
 from Brick import Brick
 from Unary_quadratic import Unary_quadratic
+from GCD import gcd
 import pyperclip
 from wox import Wox
 
@@ -20,7 +21,7 @@ class LatexCalculator(Wox):
         if query[-2:] == '$$':
             # output_results.append({
             #     'Title': "check",
-            #     'SubTitle': 'check', 
+            #     'SubTitle': 'check',
             #     "IcoPath": 'Images/icon.ico'
             # })
             li = str(query).split()
@@ -28,11 +29,11 @@ class LatexCalculator(Wox):
             equation = parsing(li[1].replace('\\\\', '\\'))
             output_results.append({
                 'Title': str(equation),
-                'SubTitle': 'check', 
-                "IcoPath": 'Images/icon.ico', 
+                'SubTitle': 'check',
+                "IcoPath": 'Images/icon.ico',
                 "JsonRPCAction": {
                     "method": "copy_result",
-                    "parameters": [str(equation)], 
+                    "parameters": [str(equation)],
                     "dontHideAfterAction": False
                 }
             })
@@ -52,11 +53,11 @@ class LatexCalculator(Wox):
                 for i in result_list:
                     output_results.append({
                         'Title': str(i),
-                        'SubTitle': 'yeah', 
-                        "IcoPath": 'Images/icon.ico', 
+                        'SubTitle': 'yeah',
+                        "IcoPath": 'Images/icon.ico',
                         "JsonRPCAction": {
                             "method": "copy_result",
-                            "parameters": [str(i)], 
+                            "parameters": [str(i)],
                             "dontHideAfterAction": False
                         }
                     })
@@ -64,7 +65,7 @@ class LatexCalculator(Wox):
 
             output_results.append({
                 'Title': str(result),
-                'SubTitle': 'yeah', 
+                'SubTitle': 'yeah',
                 "IcoPath": 'Images/icon.ico',
                 'JSONRPCAction': {
                     'method': 'copy_result',
@@ -98,9 +99,26 @@ class LatexCalculator(Wox):
                     'dontHideAfterAction': False
                 }
             })
+        elif query[0:5] == '--gcd':
+            li = str(query).split()
+            if len(li) == 3:
+                result_list = gcd(int(li[1]), int(li[2]))
+                for i in result_list:
+                    output_results.append({
+                        'Title': str(i),
+                        'SubTitle': 'yeah',
+                        "IcoPath": 'Images/icon.ico',
+                        "JsonRPCAction": {
+                            "method": "copy_result",
+                            "parameters": [str(i)],
+                            "dontHideAfterAction": False
+                        }
+                    })
+                return output_results
+
         output_results.append({
             'Title': query,
-            'SubTitle': 'first', 
+            'SubTitle': 'first',
             "IcoPath": 'Images/icon.ico'
         })
         return output_results
@@ -113,4 +131,3 @@ class LatexCalculator(Wox):
 if __name__ == '__main__':
     LatexCalculator()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/

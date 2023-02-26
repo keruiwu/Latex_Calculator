@@ -130,6 +130,6 @@ def Unary_quadratic(L):
     return Lats_List
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # $$-\frac{5}{4}x^2-\frac{5}{4}x$$
     print('hello world')
 
