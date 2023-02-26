@@ -1,3 +1,4 @@
+from differential_equation import seperable_variable as s
 def ToClose(temp):
     """
 
@@ -35,7 +36,7 @@ def frac(la, frac_index):
     direct = ToClose(la[a_end+2:])
     return {
         'index': a_end + 2 + direct['index'] + 2,
-        'result': '(' + str(a) + '/' + str(direct['result']) + ')'
+        'result': '((' + str(a) + ')/(' + str(direct['result']) + '))'
     }
 
 
@@ -56,6 +57,7 @@ def parsing(la):
      "\\mu", "\\nu", "\\xi", "\\o", "\\pi", "\\rho", "\\sigma", "\\tau", "\\upsilon", "\\varphi", "\\chi", "\\psi",
      "\\omega"]
     la = la.strip('$$')
+    la = la.strip('$')
     frac_index = la.find('\\frac')
     while frac_index != -1:
         frac_result = frac(la, frac_index+6)  # 6 means "\\frac{"
@@ -141,5 +143,8 @@ def parsing(la):
 
 
 if __name__ == '__main__':
-    test = "f(x,y)=2x^3y^4-(4x^5y^3-6x^2)(a\delta)2(x+3)"
+    # test = "f(x,y)=2x^3y^4-(4x^5y^3-6x^2)(a\delta)2(x+3)"
+    # print(parsing(test))
+    test = "$$\\frac{dy}{dx}=\\frac{(2*y + cos(y))}{(6*x**2)}$$"
     print(parsing(test))
+    print(s(parsing(test)))
