@@ -1,5 +1,5 @@
 import sympy
-
+import cd ../parsing
 def Unary_quadratic(L):
     eq_String = L.replace(" ", "")
     Lats_List = []
