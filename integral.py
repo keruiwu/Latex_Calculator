@@ -47,10 +47,8 @@ def integral(eq):
 
 
 if __name__ == '__main__':
-    eq = '\int (x ** 2 + (1/x))dx'  # equation must be surrounded by parenthesis
-    eq_2 = '\int_{b}^{a} (x ** 2 + (1/x))dx'
-    eq_3 = "\int (1/(2*y + cos(y)))dy"
-    eq_4 = "\int (1/(6*x**2))dx"
-    print(integral(eq_3))
-    print()
-    print(integral(eq_4))
+    eqs = ['\int (x ** 2 + (1/x))dx', '\int_{b}^{a} (x ** 2 + (1/x))dx', "\int (1/(2*y + cos(y)))dy", "\int (1/(6*x**2))dx", "\int (3*x**2+4*x-5)dx", 
+           "\int ((x+1)*e**(2*x))dx"]
+    for e in eqs:
+        print(integral(e))
+        print()
