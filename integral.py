@@ -35,7 +35,7 @@ def integral(eq):
     if eq[4] != '_':  # 不定积分
         equation = eq[5:eq_end+1]
         equation = simplify(equation.replace('lambda', 'lamda'))
-        return str(latex(integrate(equation, var)).replace("\\left", "").replace("\\right", "") + '+C')
+        return str(latex(integrate(equation, var)) + '+C')
     else:  # 定积分
         direct = ToClose(eq[6:])
         b = direct['result']  # 上限
@@ -44,7 +44,7 @@ def integral(eq):
         a = direct['result']  # 下限
         equation = eq[5 + b_end + 4 + direct['index'] + 3:eq_end]
         equation = simplify(equation.replace('lambda', 'lamda'))
-        return str(latex(integrate(equation, (var, a, b))).replace("\\left", "").replace("\\right", ""))
+        return str(latex(integrate(equation, (var, a, b))))
 
 
 if __name__ == '__main__': #'\int (x^2 + \frac{1}{x})dx'
