@@ -13,14 +13,11 @@ def Unary_quadratic(L):
         elif (eq_String[i] == '+' or eq_String[i] == '-') and i!=0 :
             index = 0
             var = ''
-            print(Part)
             for j in range(len(Part)):
                 if Part[j].isalpha():
                     index = j
                     var = Part[j]
-        
-            print(index)
-            print(Part[j:(len(Part)-1)])
+
             if index==0:
                 eq_Part_Dc["const"] = '1'
             else:
@@ -38,8 +35,7 @@ def Unary_quadratic(L):
             elif eq_Part_Dc["var"] == '' :
                 eq_Part_Dc["const"] = Part
                 eq_DC["C"] = eq_Part_Dc
-            
-            print(eq_Part_Dc)
+
             Syb = eq_String[i]
             Part = ""
             eq_Part_Dc = {}
@@ -48,13 +44,10 @@ def Unary_quadratic(L):
             Part+=eq_String[i]
             index = 0
             var = ''
-            print(Part)
             for j in range(len(Part)):
                 if Part[j].isalpha():
                     index = j
                     var = Part[j]
-            print(index)
-            print(Part[j:(len(Part)-1)])
             if index==0:
                 eq_Part_Dc["const"] = '1'
             else:
@@ -73,10 +66,8 @@ def Unary_quadratic(L):
                 eq_Part_Dc["const"] = Part
                 eq_DC["C"] = eq_Part_Dc
 
-            print(eq_Part_Dc)
         else:
             Part+=eq_String[i]
-            print(Part)
         
     if len(eq_DC)==1:
         Lats_List.append(sympy.latex(sympy.parse_expr(eq_DC["1st"]["var"]+ "**2")) + "= 0")
@@ -138,3 +129,4 @@ def Unary_quadratic(L):
     return Lats_List
 
 Unary_quadratic("6*x**2+4*x+4")
+
