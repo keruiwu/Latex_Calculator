@@ -78,9 +78,17 @@ def parsing(la):
         else:  # e^x
             la = la[:exp_index] + 'exp(' + la[exp_index+2] + ')' + la[exp_index+3:]
         exp_index = la.find('e^')
+    sqrt_index = la.find('\\sqrt')
+    while sqrt_index != -1:
+        sqrt_result, sqrt_half, end = sqrt(la[sqrt_index + 1:], 5)
+        la = la[0:sqrt_index] + la[sqrt_index + 1:sqrt_index + 5] + sqrt_result + sqrt_half[end + 1:]
+        sqrt_index = la.find('\\sqrt')
     power_index = la.find('^')
     while power_index != -1:
-        if la[power_index+1] == '{':
+        if la[power_index-1] == '}':
+            power_index = la.find('^', power_index+1)
+            continue
+        elif la[power_index+1] == '{':
             power_result = power_latex(la, power_index+2)
             la = la[:power_index-1] + power_result['result'] + la[power_result['index']+1:]
         else:
@@ -131,12 +139,6 @@ def parsing(la):
     while log_index != -1:
         la = la[0:log_index] + la[log_index+2:]
         log_index = la.find('\\log')
-
-    sqrt_index = la.find('\\sqrt')
-    while sqrt_index != -1:
-        sqrt_result, sqrt_half, end = sqrt(la[sqrt_index+1:], 5)
-        la = la[0:sqrt_index] + la[sqrt_index+1:sqrt_index+5] + sqrt_result + sqrt_half[end+1:]
-        sqrt_index = la.find('\\sqrt')
     i = 0
     while i < len(la):
         if i == len(la) - 1:
@@ -159,5 +161,5 @@ def parsing(la):
 if __name__ == '__main__':
     # test = "f(x,y)=2x^3y^4-(4x^5y^3-6x^2)(a\delta)2(x+3)"
     # print(parsing(test))
-    test = "$$\\frac{d(\\frac{1}{x})}{dx}$$"
+    test = "$$\int_{5}^{0} (\\frac{1}{x})dx$$"
     print(parsing(test))
