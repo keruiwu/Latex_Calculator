@@ -17,9 +17,10 @@ def binary_convert(I):
     Lat_List.append("Finally, the divisor is 1, 1/2 remains 1, We write 1 to the front of the bianry string and then reverse it")
     Binary.append(1)
     Binary.reverse()
-    Lat_List.append("The binary string will be "+"".join(str(item) for item in Binary))
+    Lat_List.append("The binary string will be ")
+    Lat_List.append("".join(str(item) for item in Binary))
     return Lat_List
 
 
-print(binary_convert(2))  
+print(binary_convert(99))  
 print(bin(8))
