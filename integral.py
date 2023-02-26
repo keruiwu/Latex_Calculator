@@ -21,7 +21,7 @@ def integral(eq):
         a = direct['result']  # 下限
         equation = eq[5 + b_end + 4 + direct['index'] + 3:eq_end]
         equation = simplify(equation.replace('lambda', 'lamda'))
-        return integrate(equation, (var, a, b))
+        return latex(integrate(equation, (var, a, b)))
 
 
 if __name__ == '__main__':
