@@ -1,5 +1,5 @@
 from sympy import *
-from parsing import parsing
+
 
 def ToClose(temp):
     """
