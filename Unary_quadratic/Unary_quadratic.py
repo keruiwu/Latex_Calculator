@@ -1,7 +1,7 @@
 import sympy
 
 def Unary_quadratic(L):
-    eq_String = L
+    eq_String = L.replace(" ", "")
     Lats_List = []
     Part = ""   #Th temp name for part
     Syb = ""    #The temp variable for +, -
@@ -135,5 +135,5 @@ def Unary_quadratic(L):
 
 
 if __name__ == '__main__':
-    print(Unary_quadratic("x**2+2*x+1"))
+    print(Unary_quadratic("(-5/4)*x**          2+2* x+ 1 "))
 
