@@ -15,5 +15,5 @@ def gradiant(Line):
         dy = d.derivative('d('+ Line +')/dy')
         dz = d.derivative('d('+ Line +')/dz')
         return "<"+dx+">, <"+dy+">, <"+dz+">"
-
-print(gradiant("2*x**2+3*y**2+2*z**2"))
+if __name__ == '__main__':
+    print(gradiant("2*x**2+3*y**2+2*z**2"))
